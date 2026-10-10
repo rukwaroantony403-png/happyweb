@@ -1,0 +1,58 @@
+.room-availability-booking{margin:30px 0;padding:24px;border:1px solid #e3eae3;border-radius:6px;background:#f8faf7}
+.room-availability-heading h2{margin:7px 0;color:var(--forest);font:600 25px/1.2 var(--serif)}
+.room-availability-heading p,.room-availability-result p{margin:7px 0 0;color:#6c8077;font-size:11px;line-height:1.65}
+.room-availability-fields{display:grid;grid-template-columns:1fr 1fr .75fr auto;align-items:end;gap:12px;margin-top:18px}
+.room-availability-fields label{display:grid;gap:6px;color:#34574e;font-size:10px;font-weight:600}
+.room-availability-fields input,.room-availability-fields select{width:100%;min-height:44px;border:1px solid #dce4dc;border-radius:4px;padding:10px 12px;color:var(--ink);background:#fff;font-size:11px}
+.room-availability-fields .gold-button{min-height:44px;white-space:nowrap}
+.room-availability-status{margin:14px 0 0;color:#637970;font-size:11px;line-height:1.65}
+.room-availability-result{display:flex;align-items:center;justify-content:space-between;gap:18px;margin-top:18px;padding:16px;border:1px solid #d6e5d9;border-radius:5px;background:#fff}
+.room-availability-result>div{display:grid;justify-items:start;gap:5px}
+.room-availability-result b{color:var(--forest);font-size:14px}
+.room-stay-total{display:flex;align-items:center;justify-content:space-between;gap:18px;margin-top:8px;color:#65776e;font-size:10px;font-weight:600}.room-stay-total span{color:var(--forest);font-size:18px;font-weight:700}
+.availability-pill{padding:5px 9px;border-radius:20px;color:#195d43;background:#e6f3e9;font-size:9px;font-weight:700;letter-spacing:.5px;text-transform:uppercase}
+.room-availability-alternatives{display:inline-block;margin-top:14px}
+.availability-check{align-self:end}
+.booking-continue{justify-self:start}
+.available-rooms{display:grid;gap:9px;margin:20px 0 14px;border:0;padding:0}.available-rooms legend{margin-bottom:10px;color:#31584b;font-size:12px;font-weight:700}.available-room{min-width:0;display:flex!important;grid-template-columns:none!important;align-items:center;gap:12px!important;border:1px solid #e0e8e1;border-radius:7px;padding:13px 15px;background:#fff;cursor:pointer;transition:border-color .18s,background .18s,box-shadow .18s}.available-room:hover,.available-room:has(input:checked){border-color:#4d8a6a;background:#f7fbf7;box-shadow:0 3px 12px #12402d0b}.available-room input{width:17px!important;height:17px;min-height:0!important;flex:0 0 auto;accent-color:#17664d}.available-room>span{min-width:0;display:grid;gap:5px}.available-room b{color:#183f34;font-size:12px}.available-room small{color:#78877e;font-size:10px;line-height:1.45}.available-room .available-room-total{color:#185c43;font-weight:700}.selected-room-summary{display:flex;align-items:center;justify-content:space-between;gap:16px;margin:20px 0 14px;border:1px solid #cddfd1;border-radius:7px;padding:16px;background:#fff}.selected-room-summary>div{min-width:0;display:grid;justify-items:start;gap:6px}.selected-room-summary b{color:var(--forest);font-size:15px}.selected-room-summary p{margin:0;color:#6c8077;font-size:10px;line-height:1.5}.selected-room-change{flex:0 0 auto;min-height:34px;border:1px solid #d7e2d8;border-radius:5px;padding:0 10px;color:#17664d;background:#fff;font-size:9px;font-weight:700;cursor:pointer}
+@media(max-width:760px){.room-availability-booking{padding:18px}.room-availability-fields{grid-template-columns:1fr 1fr}.room-availability-fields .gold-button{grid-column:1/-1;justify-self:start}.room-availability-result{align-items:flex-start;flex-direction:column}}
+@media(max-width:520px){.selected-room-summary{align-items:flex-start;flex-direction:column}.selected-room-change{width:100%}.room-stay-total{align-items:flex-start;flex-direction:column;gap:4px}}
+@media(max-width:420px){.room-availability-fields{grid-template-columns:1fr}.room-availability-fields .gold-button{grid-column:auto}.room-availability-result .gold-button{width:100%;justify-content:center}}
+.guest-part-payment{display:grid;grid-template-columns:1fr 1fr;align-items:end;gap:13px;margin-top:22px;border:1px solid #d9e5d8;border-radius:8px;padding:20px;background:linear-gradient(145deg,#f6faf5,#fff)}
+.guest-part-payment>div{grid-column:1/-1}
+.guest-part-payment h3{margin:5px 0;color:#164d3c;font:600 22px/1.2 var(--serif)}
+.guest-part-payment p{margin:5px 0 0;color:#667c71;font-size:11px;line-height:1.6}
+.guest-part-payment p b{color:#14553e}
+.guest-part-payment label{display:grid;gap:6px;color:#34574e;font-size:10px;font-weight:600}
+.guest-part-payment input{width:100%;min-height:43px;border:1px solid #dce4dc;border-radius:4px;padding:10px 12px;color:var(--ink);background:white;font-size:12px}
+.guest-part-payment>.gold-button{justify-self:start;min-height:42px}
+.guest-part-payment>small{grid-column:1/-1;color:#78877e;font-size:9px;line-height:1.5}
+.guest-part-payment .guest-payment-success,.guest-part-payment .guest-payment-error{grid-column:1/-1;margin:0;border-radius:5px;padding:10px 12px;font-size:10px}
+.guest-part-payment .guest-payment-success{color:#195d43;background:#e9f5eb}
+.guest-part-payment .guest-payment-error{color:#843f32;background:#fff0ec}
+.guest-payment-return{display:flex;flex-wrap:wrap;align-items:center;gap:5px;margin-top:16px;color:#60766a;font-size:11px}
+.guest-payment-return a{color:#145b44;font-weight:700;text-decoration:underline;text-underline-offset:3px}
+@media(max-width:600px){.guest-part-payment{grid-template-columns:1fr;padding:16px}.guest-part-payment>div,.guest-part-payment>small,.guest-part-payment .guest-payment-success,.guest-part-payment .guest-payment-error{grid-column:auto}.guest-part-payment>.gold-button{width:100%;justify-content:center}}
+.guest-payment-portal{max-width:900px;margin:0 auto;padding:0 0 54px}
+.guest-payment-portal-heading{max-width:600px;margin-bottom:22px}
+.guest-payment-portal-heading h2{margin:7px 0;color:var(--forest);font:600 clamp(27px,4vw,38px)/1.15 var(--serif)}
+.guest-payment-portal-heading p{margin:0;color:#6c8077;font-size:12px;line-height:1.7}
+.guest-payment-lookup{display:grid;grid-template-columns:1fr 1fr auto;align-items:end;gap:12px;border:1px solid #e0e7df;border-radius:8px;padding:18px;background:#f8faf7}
+.guest-payment-lookup label{display:grid;gap:6px;color:#34574e;font-size:10px;font-weight:600}
+.guest-payment-lookup input{width:100%;min-height:44px;border:1px solid #dce4dc;border-radius:4px;padding:10px 12px;color:var(--ink);background:white;font-size:12px}
+.guest-payment-lookup .gold-button{min-height:44px;white-space:nowrap}
+.guest-payment-booking{margin-top:18px;border:1px solid #dae5db;border-radius:9px;padding:20px;background:#fff;box-shadow:0 10px 32px #183c3410}
+.guest-payment-stay h3{margin:9px 0 2px;color:#174d3c;font:600 23px/1.2 var(--serif)}
+.guest-payment-stay p{margin:0;color:#78877e;font-size:10px}
+.guest-payment-balance{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin:18px 0 0}
+.guest-payment-balance>div{min-width:0;border:1px solid #edf0eb;border-radius:6px;padding:10px;background:#fbfcfa}
+.guest-payment-balance dt{color:#7a8980;font-size:9px}
+.guest-payment-balance dd{margin:4px 0 0;color:#315c48;font-size:12px;font-weight:700}
+.guest-payment-balance .guest-payment-due{border-color:#cfe2d2;background:#f0f8f0}
+.guest-payment-balance .guest-payment-due dd{color:#10583e;font-size:15px}
+.guest-payment-portal .guest-part-payment{margin-top:16px}
+.guest-payment-error,.guest-payment-success{border-radius:5px;padding:10px 12px;font-size:10px;line-height:1.55}
+.guest-payment-error{color:#843f32;background:#fff0ec}
+.guest-payment-success{color:#195d43;background:#e9f5eb}
+@media(max-width:760px){.guest-payment-lookup{grid-template-columns:1fr 1fr}.guest-payment-lookup .gold-button{grid-column:1/-1;justify-self:start}.guest-payment-balance{grid-template-columns:1fr 1fr}}
+@media(max-width:520px){.guest-payment-lookup{grid-template-columns:1fr}.guest-payment-lookup .gold-button{grid-column:auto;width:100%;justify-content:center}.guest-payment-booking{padding:15px}.guest-payment-balance{gap:6px}.guest-payment-balance>div{padding:8px}.guest-payment-balance dd{font-size:10px}.guest-payment-balance .guest-payment-due dd{font-size:12px}}
