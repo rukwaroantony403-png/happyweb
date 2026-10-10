@@ -3,6 +3,7 @@ import "./globals.css";
 
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.HOTEL_SITE_URL || "https://happylandhoteldiani.co.ke"),
+  alternates: { canonical: "/" },
   title: {
     default: "HappyLand Hotel Diani | Coastal Stays in Diani, Kenya",
     template: "%s | HappyLand Hotel Diani",
@@ -14,6 +15,14 @@ export const metadata: Metadata = {
     description: "Where Every Stay Feels Like Paradise.",
     type: "website",
     locale: "en_KE",
+    siteName: "HappyLand Hotel Diani",
+    url: "/",
+    images: [{ url: "/images/herohome.png", alt: "Palm-framed shoreline and turquoise water near Diani" }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "HappyLand Hotel Diani",
+    description: "Where Every Stay Feels Like Paradise.",
     images: [{ url: "/images/herohome.png", alt: "Palm-framed shoreline and turquoise water near Diani" }],
   },
   robots: { index: true, follow: true },

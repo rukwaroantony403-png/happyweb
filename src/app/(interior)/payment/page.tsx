@@ -1,11 +1,17 @@
-import type { Metadata } from "next";
 import { GuestPaymentPortal } from "@/components/guest-payment-portal";
 import { InteriorPage } from "@/components/interior-page";
 import { hotelPhoto } from "@/lib/hotel-content";
+import { pageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Guest Payment Portal",
-  description: "Submit partial M-Pesa payments for your HappyLand Hotel Diani booking.",
+export const metadata = {
+  ...pageMetadata({
+    title: "Guest Payment Portal",
+    description: "Submit partial M-Pesa payments for your HappyLand Hotel Diani booking.",
+    path: "/payment",
+    image: hotelPhoto("photo-1542314831-068cd1dbfeeb", 1800),
+    imageAlt: "A welcoming hotel stay",
+  }),
+  robots: { index: false, follow: true },
 };
 
 export default async function PaymentPage({ searchParams }: { searchParams: Promise<{ reference?: string | string[] }> }) {

@@ -55,14 +55,15 @@ function AmenityIcon({ name }: { name: string }) {
   return <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d={paths[name] || paths.check}/></svg>;
 }
 
-export default function RoomDetailsBrowser({ slug }: { slug: string }) {
+export default function RoomDetailsBrowser({ slug, initialRoom }: { slug: string; initialRoom?: PublishedRoom | null }) {
   const rooms = useRoomCatalog();
-  const room = findRoom(rooms, slug);
+  const room = initialRoom ?? findRoom(rooms, slug);
   const [unavailable, setUnavailable] = useState(false);
   const [galleryOpen, setGalleryOpen] = useState(false);
-  const loaded = rooms !== null || unavailable;
+  const loaded = initialRoom !== undefined || rooms !== null || unavailable;
 
   useEffect(() => {
+    if (initialRoom !== undefined) return;
     if (hasFreshRoomCatalog()) return;
     let active = true;
     fetch("/api/public/hotel", { cache: "no-store" })
@@ -76,7 +77,7 @@ export default function RoomDetailsBrowser({ slug }: { slug: string }) {
       .catch(() => { if (active && !hasFreshRoomCatalog()) setUnavailable(true); });
 
     return () => { active = false; };
-  }, []);
+  }, [initialRoom]);
 
   if (!room) {
     if (!loaded) return <RoomDetailsSkeleton />;

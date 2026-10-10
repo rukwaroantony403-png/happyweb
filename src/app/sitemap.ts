@@ -1,5 +1,5 @@
 import type { MetadataRoute } from "next";
-import { getPublicHotelSnapshot } from "@/lib/booking-system";
+import { getIndexableHotelSnapshot } from "@/lib/seo-data";
 
 export const dynamic = "force-dynamic";
 
@@ -15,13 +15,13 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     ["/offers", 0.7],
     ["/contact", 0.6],
     ["/book", 0.8],
+    ["/faq", 0.7],
   ] as const;
-  const rooms = await getPublicHotelSnapshot();
-  const roomRoutes = rooms.rooms.map((room) => [`/rooms/${encodeURIComponent(room.slug)}`, 0.8] as const);
+  const snapshot = await getIndexableHotelSnapshot();
+  const roomRoutes = snapshot?.rooms.map((room) => [`/rooms/${encodeURIComponent(room.slug)}`, 0.8] as const) || [];
 
   return [...routes, ...roomRoutes].map(([path, priority]) => ({
     url: new URL(path, siteUrl).toString(),
-    lastModified: new Date(),
     changeFrequency: "monthly",
     priority,
   }));

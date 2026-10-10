@@ -7,8 +7,9 @@ import PrefetchLink from "@/components/prefetch-link";
 import type { PublishedRoom } from "@/lib/booking-system";
 import { hasFreshRoomCatalog, publishRoomCatalog, useRoomCatalog } from "@/lib/room-catalog-cache";
 
-export default function RoomsBrowser() {
-  const rooms = useRoomCatalog();
+export default function RoomsBrowser({ initialRooms }: { initialRooms?: PublishedRoom[] }) {
+  const catalogRooms = useRoomCatalog();
+  const [rooms, setRooms] = useState<PublishedRoom[] | null>(() => initialRooms ?? catalogRooms);
   const [unavailable, setUnavailable] = useState(false);
 
   useEffect(() => {
@@ -29,6 +30,7 @@ export default function RoomsBrowser() {
         }
         if (!active) return;
         publishRoomCatalog(freshRooms as PublishedRoom[]);
+        setRooms(freshRooms as PublishedRoom[]);
         setUnavailable(false);
       } catch {
         if (active && !hasFreshRoomCatalog()) setUnavailable(true);
