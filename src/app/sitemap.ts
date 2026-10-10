@@ -15,7 +15,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     ["/offers", 0.7],
     ["/contact", 0.6],
     ["/book", 0.8],
-    ["/faq", 0.7],
   ] as const;
   const snapshot = await getIndexableHotelSnapshot();
   const roomRoutes = snapshot?.rooms.map((room) => [`/rooms/${encodeURIComponent(room.slug)}`, 0.8] as const) || [];
