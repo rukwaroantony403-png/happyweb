@@ -4,7 +4,7 @@ import { FormEvent, useEffect, useState } from "react";
 import Link from "next/link";
 
 type AvailableRoom = { slug: string; name: string; type: "room" | "combination"; availableUnits: number; nightlyRateKsh: number; totalKsh: number; nights: number; maxGuests: number };
-type ConfirmedReservation = { reference: string; roomName: string; checkIn: string; checkOut: string; guests: number; nights: number; nightlyRateKsh: number; totalKsh: number; email: string };
+type ConfirmedReservation = { reference: string; roomName: string; checkIn: string; checkOut: string; guests: number; nights: number; nightlyRateKsh: number; totalKsh: number; email: string; status: string };
 type GuestPaymentSubmission = { receiptNumber: string; amountKsh: number; balanceDueKsh: number; availableToRecordKsh: number };
 const currency = (amount: number) => new Intl.NumberFormat("en-KE").format(amount);
 const hotelToday = () => new Intl.DateTimeFormat("en-CA", { timeZone: "Africa/Nairobi", year: "numeric", month: "2-digit", day: "2-digit" }).format(new Date());
@@ -212,8 +212,8 @@ export function BookingRequestForm({ initialRoomSlug = "", initialCheckIn = "", 
       const result = await response.json();
       if (!response.ok) throw new Error(result.error || "Your reservation could not be created.");
       setReservation(result.reservation);
-      setPaymentAvailable(Number(result.reservation.totalKsh));
-      setStatus(result.emailSent ? "Confirmation email sent." : "Your reservation is saved. Hotel and guest email notifications are not configured yet.");
+      setPaymentAvailable(result.reservation.status === "confirmed" ? Number(result.reservation.totalKsh) : 0);
+      setStatus(result.emailSent ? "Your booking request is with the hotel team. Check your email for the next update." : "Your booking request is saved. The hotel will review it and confirm your stay. Contact the hotel directly if you need an urgent answer.");
     } catch (error) {
       setStatus(error instanceof Error ? error.message : "Your reservation could not be created. Please check availability again.");
       if (responseStatusConflict(error)) {
@@ -259,14 +259,13 @@ export function BookingRequestForm({ initialRoomSlug = "", initialCheckIn = "", 
   }
 
   if (reservation) return <section className="booking-confirmation" role="status">
-    <span className="section-kicker">RESERVATION CONFIRMED</span>
-    <h2>Your Diani stay is booked.</h2>
-    <p>We have reserved your room. Your booking reference is:</p>
+    <span className="section-kicker">{reservation.status === "confirmed" ? "RESERVATION CONFIRMED" : "BOOKING REQUEST RECEIVED"}</span>
+    <h2>{reservation.status === "confirmed" ? "Your Diani stay is confirmed." : "The hotel team will review your request."}</h2>
+    <p>{reservation.status === "confirmed" ? "Your reservation is confirmed. Keep this booking reference:" : "Your request has been sent for staff review. Keep this reference and wait for the hotel&apos;s confirmation before making a payment:"}</p>
     <strong className="booking-reference">{reservation.reference}</strong>
     <dl><div><dt>Room</dt><dd>{reservation.roomName}</dd></div><div><dt>Dates</dt><dd>{reservation.checkIn} to {reservation.checkOut} · {reservation.nights} nights</dd></div><div><dt>Guests</dt><dd>{reservation.guests}</dd></div><div><dt>Stay total</dt><dd>KES {currency(reservation.totalKsh)}</dd></div><div><dt>Confirmation email</dt><dd>{reservation.email}</dd></div></dl>
-    <p className="content-note">To make a part-payment, first call <a href="tel:+254729896065">+254 729 896 065</a> to confirm the hotel&apos;s current M-Pesa payment details. After paying, submit the amount and M-Pesa transaction code below. Staff will verify it before it is counted as paid.</p>
-    <p className="guest-payment-return">Need to submit a payment later? <Link href={`/payment?reference=${encodeURIComponent(reservation.reference)}`}>Return to the guest payment portal <span aria-hidden="true">→</span></Link></p>
-    {paymentAvailable > 0 && <form className="guest-part-payment" onSubmit={(event) => void submitGuestPayment(event)}>
+    <p className="content-note">{reservation.status === "confirmed" ? <>To make a part-payment, call <a href="tel:+254729896065">+254 729 896 065</a> for current M-Pesa payment details. All submitted M-Pesa transactions are verified by staff.</> : <>Please wait for the hotel to confirm your booking before making a payment. Once confirmed, call <a href="tel:+254729896065">+254 729 896 065</a> for current M-Pesa payment details. All submitted M-Pesa transactions are verified by staff.</>}</p>
+    {reservation.status === "confirmed" && paymentAvailable > 0 && <form className="guest-part-payment" onSubmit={(event) => void submitGuestPayment(event)}>
       <div><span className="section-kicker">SECURE YOUR STAY · PART-PAYMENTS WELCOME</span><h3>Submit an M-Pesa payment</h3><p>Booking {reservation.reference} · Remaining amount available to submit: <b>KES {currency(paymentAvailable)}</b></p></div>
       <label>Amount paid (KES)<input name="amountKsh" type="number" min="1" max={paymentAvailable} step="1" required placeholder="Enter the amount you paid"/></label>
       <label>M-Pesa transaction code<input name="transactionReference" required minLength={4} maxLength={120} autoComplete="off" placeholder="e.g. QAB12CD34E"/></label>
@@ -275,7 +274,7 @@ export function BookingRequestForm({ initialRoomSlug = "", initialCheckIn = "", 
       {paymentError && <p className="guest-payment-error" role="alert">{paymentError}</p>}
       <small>Submitting a code does not confirm payment. A staff member verifies each M-Pesa transaction before updating your balance.</small>
     </form>}
-    {paymentAvailable <= 0 && <><p className="guest-payment-success">All of the available stay balance has been submitted for payment review.</p>{lastPaymentSubmission && <p className="guest-payment-success" role="status">{lastPaymentSubmission}</p>}</>}
+    {reservation.status === "confirmed" && paymentAvailable <= 0 && <><p className="guest-payment-success">All of the available stay balance has been submitted for payment review.</p>{lastPaymentSubmission && <p className="guest-payment-success" role="status">{lastPaymentSubmission}</p>}</>}
     {status && <p className="form-status">{status}</p>}
   </section>;
 
