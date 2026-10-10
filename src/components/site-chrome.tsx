@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useState } from "react";
-import { hotelPhone } from "@/lib/hotel-content";
+import { hotelPhone, hotelPhoneDisplay } from "@/lib/hotel-content";
 
 const navItems = [
   ["Home", "/"],
@@ -50,7 +50,7 @@ export function SiteFooter() {
       <div><Link className="brand" href="/" aria-label="HappyLand Hotel Diani home"><Image className="brand-logo" src="/images/logo.png" alt="HappyLand Hotel Diani" width={1280} height={1024} sizes="120px" /></Link><p>Where Every Stay Feels Like Paradise</p></div>
       <div><b>Explore</b><Link href="/rooms">Rooms</Link><Link href="/experiences">Experiences</Link><Link href="/dining">Dining</Link><Link href="/gallery">Gallery</Link></div>
       <div><b>HappyLand</b><Link href="/about">About</Link><Link href="/offers">Offers</Link><Link href="/contact">Contact</Link><Link href="/book">Book Now</Link></div>
-      <div><b>Contact</b><span>Diani, Kenya</span><a href={`tel:${hotelPhone}`}>+254 729 896 065</a><Link href="/contact">Get in touch</Link></div>
+      <div><b>Contact</b><span>Diani, Kenya</span><a href={`tel:${hotelPhone}`}>{hotelPhoneDisplay}</a><Link href="/contact">Get in touch</Link></div>
     </div>
     <div className="wrap footer-bottom"><span>© {new Date().getFullYear()} HappyLand Hotel Diani. All rights reserved.</span><span>Privacy · Terms · Booking information</span></div>
   </footer>;

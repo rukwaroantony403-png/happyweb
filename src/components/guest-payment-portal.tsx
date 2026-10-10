@@ -2,6 +2,7 @@
 
 import type { FormEvent } from "react";
 import { useState } from "react";
+import { hotelPhone, hotelPhoneDisplay } from "@/lib/hotel-content";
 
 type PaymentBooking = {
   reference: string;
@@ -108,7 +109,7 @@ export function GuestPaymentPortal({ initialReference = "" }: { initialReference
         <div className="guest-payment-due"><dt>Balance due</dt><dd>KES {currency(booking.balanceDueKsh)}</dd></div>
       </dl>
       {booking.availableToRecordKsh > 0 ? <form className="guest-part-payment" onSubmit={(event) => void submitPayment(event)}>
-        <div><span className="section-kicker">PART-PAYMENTS WELCOME</span><h3>Submit an M-Pesa payment</h3><p>Before paying, call <a href="tel:+254729896065">+254 729 896 065</a> to confirm current M-Pesa payment details. Available to submit: <b>KES {currency(booking.availableToRecordKsh)}</b></p></div>
+        <div><span className="section-kicker">PART-PAYMENTS WELCOME</span><h3>Submit an M-Pesa payment</h3><p>Before paying, call <a href={`tel:${hotelPhone}`}>{hotelPhoneDisplay}</a> to confirm current M-Pesa payment details. Available to submit: <b>KES {currency(booking.availableToRecordKsh)}</b></p></div>
         <label>Amount paid (KES)<input name="amountKsh" type="number" min="1" max={booking.availableToRecordKsh} step="1" required placeholder="Enter the amount you paid"/></label>
         <label>M-Pesa transaction code<input name="transactionReference" required minLength={4} maxLength={120} autoComplete="off" placeholder="e.g. QAB12CD34E"/></label>
         <button className="gold-button" type="submit" disabled={paymentBusy}>{paymentBusy ? "Submitting payment…" : "Submit for verification"} <span aria-hidden="true">→</span></button>
